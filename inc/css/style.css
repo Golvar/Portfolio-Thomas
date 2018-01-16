@@ -1,0 +1,14 @@
+p {
+  font-size: large;
+}
+
+iframe, img {
+    margin: 0 auto;
+    margin-bottom: 5%;
+    margin-top: 2%;
+    display:block;
+}
+
+.inPara {
+  font-size: large;
+}

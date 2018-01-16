@@ -1,0 +1,140 @@
+@import url(/timeline.css);
+
+body {
+	font-family: 'Open Sans', sans-serif;
+}
+
+h1{
+	font-family: 'Lobster', cursive;
+	color:rgb(58,83,155);
+}
+
+h2 {
+	font-family: 'Open Sans', cursive;
+	margin-bottom: 40px;
+}
+
+h3{
+	font-family: 'Lobster', cursive;
+	color :#bdc3c7;
+
+}
+p{
+	font-size : 16px;
+}
+
+
+.imgPerso{
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
+.barreCenter{
+	margin-left: 25%;
+}
+
+.row{
+	margin-bottom: 30px;
+	margin-right: -15px;
+  	margin-left: -15px;
+}
+.feature {
+	font-weight: : 300;
+}
+
+.tab{
+	margin-left: 50px;
+}
+
+.header{
+	border-radius: 30px;
+	background-color: rgba(1,1,1,0.7);
+}
+
+.imgProg{
+	margin-top: 30px;
+	margin-bottom: 20px;
+	width: 25%;
+}
+.posFormation{
+	margin-bottom: 50px;
+}
+
+.jumbotron h1{
+	color:rgb(58,83,155);
+}
+
+
+hr.style-two {
+	border: 0;
+	height: 1px;
+	background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(255, 255, 255, 0.75), rgba(0, 0, 0, 0));
+}
+
+.progress{
+	width: 50%
+}
+
+.myPresentation{
+	border-radius: 30px;
+	background-color: rgba(236, 240, 241,1.0);
+
+}
+
+.svg {
+	margin-top: 20px;
+	margin-bottom: 10px;
+	width: 25%;
+	height: 25%;
+}
+
+.parallax {
+
+    background-image: url(../../image/keyboard.jpg);
+    height: 100%;
+
+    /* effet de paralax */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+#photoPerso {
+	margin-top: 20px;
+	width : 150px;
+}
+#myHeader {
+	text-align: center;
+	padding-bottom: 100px;
+	padding-top: 100px;
+	color :white;
+}
+
+
+#myHeader p{
+	font-family: 'Lobster', cursive;
+	color:#ecf0f1;
+}
+
+
+
+#myFooter{
+	padding: 30px;
+	background-color: #212121;
+	color: lightgrey;
+
+}
+
+#myFooter a {
+  color: lightgrey;
+}
+#myFooter a:hover {
+  color: white;
+}
+#myHeader a{
+	color: lightgrey;
+}
+#myHeader a:hover {
+  color: white;
+}
