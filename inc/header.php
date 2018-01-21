@@ -50,6 +50,10 @@
               </li>
                 <li><a target="blank" href="http://www.thomas-galocha.fr">Curriculum Vitae</a></li>
                 <li><a href="cv.php">Me contacter</a></li>
+                <?php if(isset($_SESSION['auth'])) :?>
+                  <li><a href="editeur.php">Nouveau post</a></li>
+                  <li><a href="logout.php">Déconnexion</a></li>
+                <?php endif; ?>
             </ul>
           </div>
         </div>
