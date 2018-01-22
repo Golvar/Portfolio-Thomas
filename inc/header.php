@@ -50,14 +50,16 @@
                     <?php if ($value->id_category == 1): ?>
                       <li><a href="vue.php?id=<?= $value->id_category?>&title=<?= $value->title_post ?>"><?= $value->title_post ?></a></li>
                     <?php endif; ?>
-
-
                   <?php endforeach; ?>
                 </ul>
               </li>
               <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?= $resNameCategory[2]->name_category ?><span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="">Télégram</a></li>
+                  <?php foreach ($resTitleCat as $key => $value) :?>
+                    <?php if ($value->id_category == 3): ?>
+                      <li><a href="vue.php?id=<?= $value->id_category?>&title=<?= $value->title_post ?>"><?= $value->title_post ?></a></li>
+                    <?php endif; ?>
+                  <?php endforeach; ?>
                 </ul>
               </li>
                 <li><a target="blank" href="http://www.thomas-galocha.fr">Curriculum Vitae</a></li>
