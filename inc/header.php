@@ -2,6 +2,16 @@
   if(session_status() == PHP_SESSION_NONE){
     session_start();
   }
+
+  require_once 'inc/db.php';
+
+  $reqNameCategory = $pdo->prepare('SELECT * FROM category');
+  $reqNameCategory->execute();
+  $resNameCategory=$reqNameCategory->fetchAll();
+
+  $reqTitleCat = $pdo->prepare('SELECT * FROM post');
+  $reqTitleCat->execute();
+  $resTitleCat= $reqTitleCat->fetchAll();
 ?>
 
 <!DOCTYPE html>
@@ -28,22 +38,24 @@
           <a class ="navbar-brand" href="index.php">Thomas <strong>Galocha</strong></a>
           <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-              <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Expériences Professionnelles<span class="caret"></span></a>
+              <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?= $resNameCategory[1]->name_category ?><span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="1_SIO_Stage.php">Stage BTS SIO 1ère année</a></li>
                   <li><a href="">Stage BTS SIO 2ème années</a></li>
                 </ul>
               </li>
-              <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Mes Projets<span class="caret"></span></a>
+              <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?= $resNameCategory[0]->name_category ?><span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="">Golf de la Wantzenau</a></li>
-                  <li><a href="">Site des pompiers de Hoenheim</a></li>
-                  <li><a href="">Géstionnaire de régate</a></li>
-                  <li><a href="">Jeu du master-mind</a></li>
-                  <li><a href="">Générateur de mot de passe</a></li>
+                  <?php foreach ($resTitleCat as $key => $value) :?>
+                    <?php if ($value->id_category == 1): ?>
+                      <li><a href="vue.php?id=<?= $value->id_category?>&title=<?= $value->title_post ?>"><?= $value->title_post ?></a></li>
+                    <?php endif; ?>
+
+
+                  <?php endforeach; ?>
                 </ul>
               </li>
-              <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Veille juridique<span class="caret"></span></a>
+              <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?= $resNameCategory[2]->name_category ?><span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="">Télégram</a></li>
                 </ul>
