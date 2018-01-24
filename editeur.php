@@ -1,4 +1,9 @@
 <?php
+session_start();
+if(empty($_SESSION['auth']->id_admin)){
+  $_SESSION['flash']['danger']= "Vous n'avez pas accés à cette page !";
+  header('Location: login.php');
+  }
 require_once "inc/header.php";
 require_once 'inc/db.php';
 $reqCategory = $pdo->prepare('SELECT * FROM category');
@@ -10,19 +15,26 @@ if($_GET['value']=='newpost'){
   if (!empty($_POST['editor2'])) {
     $reqpost= $pdo->prepare('INSERT INTO post SET title_post = ?, content_post = ?, id_admin=?, id_category=?');
     $reqpost->execute([$_POST['title'], $_POST['editor2'], $_SESSION['auth']->id_admin, $_POST['category']]);
+      $_SESSION['flash']['success'] = 'Le post :<strong> ' .$_POST['title'] .  ' </strong>a bien été crée !';
   }
 }elseif ($_GET['value']=='modifpost') {
   $article = 'Modifier';
   $reqpostexist = $pdo->prepare('SELECT * FROM post');
   $reqpostexist->execute();
   $allArticles = $reqpostexist->fetchAll();
-  if(!empty($_POST['articleAModifer'])){
+  if (!empty($_POST['editor2']) && empty($_POST['btnmodifpost'])) {
+    $reqpost= $pdo->prepare('UPDATE post SET title_post = ?, content_post = ?, id_admin=?, id_category=? WHERE id_post = ?');
+    $reqpost->execute([$_POST['title'], $_POST['editor2'], $_SESSION['auth']->id_admin, $_POST['category'], $_SESSION['idpost']]);
+    unset($_SESSION['idpost']);
+    $_SESSION['flash']['success'] = 'Le post :'.$_POST['title'] . ' a bien été modifié !';
+  }
+  if(!empty($_POST['btnmodifpost'])){
     $reqpostamodif = $pdo->prepare('SELECT * FROM post WHERE id_post = ?');
     $reqpostamodif->execute([$_POST['articleAModifer']]);
     $datapost= $reqpostamodif->fetch();
     $title = $datapost->title_post;
+    $_SESSION['idpost'] = $datapost->id_post;
   }
-
 }
 
  ?>
@@ -30,6 +42,15 @@ if($_GET['value']=='newpost'){
 	<script src="ckeditor/ckeditor.js">
   </script>
 </head>
+
+<?php if(isset($_SESSION['flash'])): ?>
+  <?php  foreach($_SESSION['flash'] as $type => $message): ?>
+    <div class="alert alert-<?= $type ?>">
+      <?= $message; ?>
+    </div>
+  <?php endforeach; ?>
+<?php unset($_SESSION['flash']); ?>
+<?php endif; ?>
 
 <body>
 <h1 style="text-align:center;" ><?= $article ?> article </h1> <br>
@@ -42,7 +63,7 @@ if($_GET['value']=='newpost'){
             <option value=<?= $value->id_post?>><?= $value->title_post ?></option>"
           <?php endforeach;?>
         </select>
-        <button  name="btnmodifpost" class="btn btn-primary btn-sm">Selectionner</button>
+        <button  name="btnmodifpost" value=1 class="btn btn-primary btn-sm">Selectionner</button>
       </p>
     <?php endif; ?>
 
@@ -53,8 +74,13 @@ if($_GET['value']=='newpost'){
       <?php endforeach;?>
     </select>
     </p>
-    <p>Nom de l'article : <input type="text" name="title" class="form-control" value=<?= $title; ?>></input></p>
-  	<textarea cols="80" id="editor2" name="editor2" rows="10" ></textarea>
+    <p>Nom de l'article : <input type="text" name="title" class="form-control" value='<?= $title; ?>'></input></p>
+      <textarea cols="80" id="editor2" name="editor2" rows="10" >
+        <?php if(!empty($_POST['btnmodifpost'])): ?>
+            <?= $datapost->content_post; ?>
+        <?php endif; ?>
+      </textarea>
+
 
   	<script>
   		CKEDITOR.replace( 'editor2', {
@@ -66,7 +92,7 @@ if($_GET['value']=='newpost'){
     </br>
 
     <p>
-      <button  name="newpost" class="btn btn-primary">Envoyer</button>
+      <button  name="newpost" class="btn btn-primary" >Envoyer</button>
     </p>
 
   </form>

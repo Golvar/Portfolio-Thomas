@@ -4,8 +4,8 @@ DROP TABLE IF EXISTS category ;
 
 CREATE TABLE post (
   id_post INT AUTO_INCREMENT NOT NULL,
-  title_post VARCHAR(255),
-  content_post VARCHAR(255),
+  title_post TEXT,
+  content_post TEXT,
   date_post VARCHAR(100),
   id_admin INT,
   id_category INT,

@@ -41,7 +41,7 @@
               <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?= $resNameCategory[1]->name_category ?><span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
                   <li><a href="1_SIO_Stage.php">Stage BTS SIO 1ère année</a></li>
-                  <li><a href="">Stage BTS SIO 2ème années</a></li>
+                  <li><a href="vue.php?id=2&title=Stage BTS SIO 2ème années">Stage BTS SIO 2ème années</a></li>
                 </ul>
               </li>
               <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?= $resNameCategory[0]->name_category ?><span class="caret"></span></a>
@@ -80,3 +80,12 @@
    </div>
 
 <div class="container">
+
+  <?php if(isset($_SESSION['flash'])): ?>
+    <?php  foreach($_SESSION['flash'] as $type => $message): ?>
+      <div class="alert alert-<?= $type ?>">
+        <?= $message; ?>
+      </div>
+    <?php endforeach; ?>
+  <?php unset($_SESSION['flash']); ?>
+  <?php endif; ?>
