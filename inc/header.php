@@ -69,8 +69,8 @@
                 <?php endforeach; ?>
               </ul>
             </li>
-              <li><a target="blank" href="http://www.thomas-galocha.fr">Curriculum Vitae</a></li>
-              <li><a href="cv.php">Me contacter</a></li>
+              <li><a target='_blank'href="cv_thomas.pdf">Curriculum Vitae</a></li>
+            <!-- <li><a href="cv.php">Me contacter</a></li> -->
               <?php if(isset($_SESSION['auth'])) :?>
                 <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Post<span class="caret"></span></a>
                   <ul class="dropdown-menu" role="menu">

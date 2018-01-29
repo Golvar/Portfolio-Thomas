@@ -26,7 +26,7 @@ if($_GET['value']=='newpost'){
     $reqpost= $pdo->prepare('UPDATE post SET title_post = ?, content_post = ?, id_admin=?, id_category=? WHERE id_post = ?');
     $reqpost->execute([$_POST['title'], $_POST['editor2'], $_SESSION['auth']->id_admin, $_POST['category'], $_SESSION['idpost']]);
     unset($_SESSION['idpost']);
-    $_SESSION['flash']['success'] = 'Le post :'.$_POST['title'] . ' a bien été modifié !';
+    $_SESSION['flash']['success'] = 'Le post : '.$_POST['title'] . ' a bien été modifié !';
   }
   if(!empty($_POST['btnmodifpost'])){
     $reqpostamodif = $pdo->prepare('SELECT * FROM post WHERE id_post = ?');
@@ -45,7 +45,7 @@ if($_GET['value']=='newpost'){
 
 <?php if(isset($_SESSION['flash'])): ?>
   <?php  foreach($_SESSION['flash'] as $type => $message): ?>
-    <div class="alert alert-<?= $type ?>">
+    <div class="alert alert-<?= $type ?>" >
       <?= $message; ?>
     </div>
   <?php endforeach; ?>
